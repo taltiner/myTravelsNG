@@ -1,23 +1,25 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-3">
+<div>
+    <div class="d-flex flex-row justify-content-start flex-wrap">
+        <div class="col-md-3 w-25">
             <label for="country">Country</label>
             <input class="form-control ml-3" type="text" id="country" #countryInput>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 w-25">
             <label for="city">City</label>
             <input class="form-control ml-3" type="text" id="city" #cityInput>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 w-25">
             <label for="dateBegin">Begin</label>
             <input class="form-control ml-3" type="date" id="beginDate" #beginDateInput>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 w-25">
             <label for="dateEnd">End</label>
             <input class="form-control ml-3" type="date" id="dateEnd" #endDateInput>
         </div>
     </div>
+    <div class="btn btn-success" style="margin-top: 20px;" (click)="emitTravel(beginDateInput, endDateInput)">Add
+        Travel
+    </div>
 </div>
-<div class="btn btn-success" (click)="emitTravel(beginDateInput, endDateInput)">Add Travel
-</div>
+
 <hr>
