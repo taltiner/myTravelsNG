@@ -1,4 +1,10 @@
-<div>
+<mat-expansion-panel style="margin-bottom: 2rem;">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Add a new travel.
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+
     <div class="d-flex flex-row justify-content-start flex-wrap">
         <div class="col-md-3 w-25">
             <label for="country">Country</label>
@@ -17,9 +23,6 @@
             <input class="form-control ml-3" type="date" id="dateEnd" #endDateInput>
         </div>
     </div>
-    <div class="btn btn-success" style="margin-top: 20px;" (click)="emitTravel(beginDateInput, endDateInput)">Add
-        Travel
-    </div>
-</div>
-
-<hr>
+    <button style="margin-top: 20px;" (click)="emitTravel(beginDateInput, endDateInput)" mat-stroked-button
+        color="primary">Add Travel</button>
+</mat-expansion-panel>

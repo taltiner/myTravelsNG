@@ -1,8 +1,2 @@
 <app-add-travel></app-add-travel>
-<div class="container">
-    <app-list-travel *ngFor="let travel of travels" [travel]="travel"
-        (deleteIndex)="saveDeleteIndex($event)"></app-list-travel>
-</div>
-<div class="mt-5">
-    <button (click)="deleteTravel()" class="btn btn-warning">Delete Travel</button>
-</div>
+<app-list-travel></app-list-travel>

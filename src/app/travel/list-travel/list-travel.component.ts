@@ -1,5 +1,8 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { TRAVEL } from '../travel.model';
+import { TravelService } from '../travel.service';
+import { v4 as uuidv4 } from 'uuid';
+
 
 @Component({
   selector: 'app-list-travel',
@@ -7,13 +10,23 @@ import { TRAVEL } from '../travel.model';
   styleUrl: './list-travel.component.css'
 })
 export class ListTravelComponent implements OnInit {
-  @Input() travel: TRAVEL;
+  travels: TRAVEL[] = [];
   @Output() deleteIndex = new EventEmitter<string[]>();
   selectedTravelIds: string[] = [];
+  i: number;
+  arrayIndexDelete: number[] = [];
+
+  constructor(private travelService: TravelService) { }
+
+  ngOnInit() {
+    this.travels = this.travelService.getMyTravels();
+  }
 
 
-  ngOnInit(): void {
 
+  deleteTravel() {
+    this.travelService.deleteTravel(this.travels, this.arrayIndexDelete);
+    this.arrayIndexDelete = [];
   }
 
   setIds(uuid: string, event: Event) {
@@ -26,8 +39,13 @@ export class ListTravelComponent implements OnInit {
         this.selectedTravelIds.splice(index, 1);
       }
     }
-    console.log('selected uuid = ' + uuid);
-    this.deleteIndex.emit(this.selectedTravelIds);
+
+    for (let emUuid of this.selectedTravelIds) {
+      const travelToRemove = this.travels.find(travel => travel.uuid === emUuid);
+      if (travelToRemove) {
+        this.arrayIndexDelete.push(this.travels.indexOf(travelToRemove));
+      }
+    }
   }
 
 

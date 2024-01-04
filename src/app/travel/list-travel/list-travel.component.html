@@ -1,12 +1,53 @@
-<div class="row">
-    <div class="form-check col-md-2">
-        <input type="checkbox" class="form-check-input" id="{{travel.uuid}}" (change)="setIds(travel.uuid, $event)"
-            #index>
-    </div>
-    <div class="col-md-2">
-        {{travel.country}}
-    </div>
-    <div class="col-md-2">{{travel.city}}</div>
-    <div class="col-md-3">{{travel.beginDate}}</div>
-    <div class="col-md-3">{{travel.endDate}}</div>
-</div>
+<mat-expansion-panel style="margin-bottom: 2rem;">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Show all travels.
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-card>
+        <mat-card-content class="mb-5">
+            <div class="d-flex flex-row justify-content-start flex-wrap">
+                <div class="form-check col-md-1 w-5">
+                </div>
+                <div class="col-md-2 w-20">
+                    <label for="country">Country</label>
+                </div>
+                <div class="col-md-2 w-20">
+                    <label for="city">City</label>
+                </div>
+                <div class="col-md-3 w-25">
+                    <label for="dateBegin">Begin</label>
+                </div>
+                <div class="col-md-3 w-25">
+                    <label for="dateEnd">End</label>
+                </div>
+            </div>
+            <hr>
+            <div *ngFor="let travel of travels" class="d-flex flex-row justify-content-start flex-wrap">
+                <div class="form-check col-md-1 w-5">
+                    <input type="checkbox" class="form-check-input" id="{{travel.uuid}}"
+                        (change)="setIds(travel.uuid, $event)" #index>
+                </div>
+                <div class="col-md-2 w-20">
+
+                    {{travel.country}}
+                </div>
+                <div class="col-md-2 w-20">
+
+                    {{travel.city}}
+                </div>
+                <div class="col-md-3 w-25">
+
+                    {{travel.beginDate}}
+                </div>
+                <div class="col-md-3 w-25">
+
+                    {{travel.endDate}}
+                </div>
+            </div>
+        </mat-card-content>
+        <div class="m-3">
+            <button (click)="deleteTravel()" mat-stroked-button color="warn">Delete</button>
+        </div>
+    </mat-card>
+</mat-expansion-panel>
