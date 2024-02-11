@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-travel',
@@ -15,14 +15,14 @@ export class AddTravelComponent implements OnInit {
 
   initializeForm(){
     this.travelForm = new FormGroup({
-      'startDate': new FormControl(null),
-      'endDate': new FormControl(null),
-      'country': new FormControl(null),
-      'city': new FormControl(null),
-      'activities': new FormControl(null),
-      'comment': new FormControl(null),
+      'startDate': new FormControl(null, Validators.required),
+      'endDate': new FormControl(null, Validators.required),
+      'country': new FormControl(null, Validators.required),
+      'city': new FormControl(null, Validators.required),
+      'activities': new FormControl(null, Validators.required),
+      'comment': new FormControl(null, Validators.required),
       'rating': new FormGroup({
-        'rating': new FormControl(null)
+        'rating': new FormControl(null, Validators.required)
       })
     });
   }
