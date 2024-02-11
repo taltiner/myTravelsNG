@@ -1,0 +1,48 @@
+<form [formGroup]="travelForm" (ngSubmit)="onSubmit()" style="max-width:800px;">
+    <div class="responsive-form-fields">
+        <mat-form-field>
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="startDate">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="endDate">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+    </div>   
+    <div class="responsive-form-fields">
+        <mat-form-field class="example-full-width">
+            <mat-label>Country</mat-label>
+            <input matInput formControlName="country">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>City</mat-label>
+            <input matInput formControlName="city">
+          </mat-form-field>  
+    </div> 
+    <div class="responsive-form-fields">
+        <mat-form-field>
+            <mat-label>Activities</mat-label>
+            <mat-select formControlName="activities" multiple> 
+                <mat-option value="Test1">Test1</mat-option>
+                <mat-option value="Test2">Test2</mat-option>            
+            </mat-select>
+        </mat-form-field>
+        <app-rating [ratingForm]="travelForm.get('rating')"></app-rating>
+    </div>
+    <div>
+        <mat-form-field style="width:100%">
+            <mat-label>Comment</mat-label>
+            <textarea name="" id="comment-area" matInput formControlName="comment"></textarea>
+        </mat-form-field>
+    </div>
+    <div class="button-group">
+        <button type="submit" mat-flat-button color="primary">Save</button>
+        <button type="button" mat-stroked-button color="primary">Cancel</button>
+    </div>  
+</form>

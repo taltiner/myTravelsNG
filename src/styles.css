@@ -3,7 +3,7 @@
 html,
 body {
     height: 100%;
-    background-color: rgb(208, 231, 231);
+    /* background-color: rgb(208, 231, 231); */
 }
 
 body {
@@ -19,4 +19,28 @@ body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.spacing {
+    padding: 20px 50px 0px 50px;
+}
+
+.responsive-form-fields {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    width: 100%;
+    gap: 4%;
+    margin-bottom: 20px;
+
+    >* {
+        flex-grow: 1;
+    }
+}
+
+.button-group {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 200px;
 }

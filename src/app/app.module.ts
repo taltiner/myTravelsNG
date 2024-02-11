@@ -3,10 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
-import { TravelComponent } from './travel/travel.component';
-import { AddTravelComponent } from './travel/add-travel/add-travel.component';
-import { ListTravelComponent } from './travel/list-travel/list-travel.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
@@ -16,27 +13,43 @@ import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { DisplayTravelComponent } from './display-travel/display-travel.component';
+import { AddTravelComponent } from './add-travel/add-travel.component'
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import { RatingComponent } from './rating/rating.component';
+import { StoreModule } from '@ngrx/store';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    TravelComponent,
     AddTravelComponent,
-    ListTravelComponent,
     NavbarComponent,
+    DisplayTravelComponent,
+    AddTravelComponent,
+    RatingComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatExpansionModule,
     MatCardModule,
     MatToolbarModule,
     MatIconModule,
     MatDividerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatSelectModule,
+    StoreModule.forRoot({}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]
