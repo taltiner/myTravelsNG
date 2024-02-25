@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -24,7 +24,13 @@ import { RatingComponent } from './rating/rating.component';
 import { StoreModule } from '@ngrx/store';
 import { travelReducer } from './store/travel.reducer';
 import { MatTableModule } from '@angular/material/table';
+import {MatMenuModule} from '@angular/material/menu';
 
+const appRoutes: Routes = [
+  { path: '', component: DisplayTravelComponent },
+  { path: 'addTravel', component: AddTravelComponent },
+  { path: 'displayTravel', component: DisplayTravelComponent }
+];
 
 @NgModule({
   declarations: [
@@ -52,9 +58,11 @@ import { MatTableModule } from '@angular/material/table';
     MatInputModule,
     MatSelectModule,
     MatTableModule,
+    MatMenuModule,
     StoreModule.forRoot({
       travel: travelReducer,
-    })
+    }),
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]

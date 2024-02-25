@@ -1,7 +1,11 @@
 <mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <button [matMenuTriggerFor]="menu" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
     </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item><a routerLink="/addTravel">Add Travel</a></button>
+        <button mat-menu-item><a routerLink="/displayTravel">Display Travel</a></button>
+      </mat-menu>
     <span>MyTravels</span>
     <span class="example-spacer"></span>
 </mat-toolbar>

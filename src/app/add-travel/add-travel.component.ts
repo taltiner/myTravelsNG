@@ -48,10 +48,7 @@ export class AddTravelComponent implements OnInit {
     console.log(this.travelForm);
     this.store.dispatch(addTravel({ form: this.travelForm }));
     console.log('----NACH SPEICHERN INITIALER STATE');
-    setTimeout(() => {
       console.log(this.travelState$);
-    }, 9000)
-
   }
 
   validateLocation(control: FormControl): { [s: string]: boolean } | null {
