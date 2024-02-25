@@ -22,7 +22,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { RatingComponent } from './rating/rating.component';
 import { StoreModule } from '@ngrx/store';
-
+import { travelReducer } from './store/travel.reducer';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,9 @@ import { StoreModule } from '@ngrx/store';
     MatNativeDateModule,
     MatInputModule,
     MatSelectModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot({
+      travel: travelReducer,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

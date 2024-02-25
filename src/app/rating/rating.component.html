@@ -1,9 +1,7 @@
 <form [formGroup]="ratingForm">
     <fieldset class="starability-growRotate">
         <legend>Rating:</legend>
-        <input type="radio" id="no-rate" class="input-no-rate" formControlName="rating"
-            value="1" checked aria-label="No rating." />
-        <input type="radio" id="first-rate1"  value="1" />
+        <input type="radio" id="first-rate1" value="1" />
         <label for="first-rate1" title="Terrible">1 star</label>
         <input type="radio" id="first-rate2" formControlName="rating" value="2" />
         <label for="first-rate2" title="Not good">2 stars</label>
@@ -14,4 +12,7 @@
         <input type="radio" id="first-rate5" formControlName="rating" value="5" />
         <label for="first-rate5" title="Amazing">5 stars</label>
     </fieldset>
+    <span 
+    *ngIf="ratingForm.invalid"
+    class="invalid">Please select a rating</span>
 </form>

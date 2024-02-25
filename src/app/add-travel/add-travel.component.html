@@ -26,21 +26,22 @@
           <mat-form-field class="example-full-width">
             <mat-label>City</mat-label>
             <input matInput formControlName="city">
-            <mat-error *ngIf="travelForm.get('city').errors && travelForm.get('city').errors['maxLengthIsReached']">Maximum length is 20!</mat-error>
-            <mat-error *ngIf="travelForm.get('city').errors && travelForm.get('city').errors['numbersEntered']">Only letters are allowed!</mat-error>
+            <mat-error *ngIf="travelForm.get('city').errors && travelForm.get('city').errors['maxLengthError']">Maximum length is 20!</mat-error>
+            <mat-error *ngIf="travelForm.get('city').errors && travelForm.get('city').errors['onlyLettersError']">Only letters are allowed!</mat-error>
           </mat-form-field>  
     </div> 
     <div class="responsive-form-fields">
         <mat-form-field>
             <mat-label>Activities</mat-label>
-            <mat-select formControlName="activities"> 
+            <mat-select formControlName="activities">
+                <mat-option value=""></mat-option>
                 <mat-option value="Test1">Test1</mat-option>
                 <mat-option value="Test2">Test2</mat-option>            
             </mat-select>
         </mat-form-field>
-        <app-rating [ratingForm]="travelForm.get('rating')"></app-rating>
+        <app-rating *ngIf="travelForm.controls.activities.value" [ratingForm]="travelForm.get('rating')"></app-rating>
     </div>
-    <div>
+    <div *ngIf="travelForm.controls.activities.value">
         <mat-form-field style="width:100%">
             <mat-label>Comment</mat-label>
             <textarea name="" id="comment-area" matInput formControlName="comment"></textarea>
