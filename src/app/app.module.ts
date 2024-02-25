@@ -15,14 +15,16 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { DisplayTravelComponent } from './display-travel/display-travel.component';
 import { AddTravelComponent } from './add-travel/add-travel.component'
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { RatingComponent } from './rating/rating.component';
 import { StoreModule } from '@ngrx/store';
 import { travelReducer } from './store/travel.reducer';
+import { MatTableModule } from '@angular/material/table';
+
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { travelReducer } from './store/travel.reducer';
     MatNativeDateModule,
     MatInputModule,
     MatSelectModule,
+    MatTableModule,
     StoreModule.forRoot({
       travel: travelReducer,
     })

@@ -14,7 +14,7 @@ export class AddTravelComponent implements OnInit {
   travelForm: FormGroup = new FormGroup("");
   travelState$: Observable<TravelState>
 
-  constructor(private store: Store<{travel:TravelState}>){
+  constructor(private store: Store<{ travel: TravelState }>) {
     this.travelState$ = store.select('travel');
   }
 
@@ -25,12 +25,12 @@ export class AddTravelComponent implements OnInit {
     this.onActivityChange();
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     console.log('----NACH INITIALER STATE');
     console.log(this.travelState$);
   }
 
-  initializeForm(){
+  initializeForm() {
     this.travelForm = new FormGroup({
       'startDate': new FormControl(null, Validators.required),
       'endDate': new FormControl(null, Validators.required),
@@ -44,60 +44,60 @@ export class AddTravelComponent implements OnInit {
     });
   }
 
-  onSubmit(){
+  onSubmit() {
     console.log(this.travelForm);
-    this.store.dispatch(addTravel({form: this.travelForm}));
+    this.store.dispatch(addTravel({ form: this.travelForm }));
     console.log('----NACH SPEICHERN INITIALER STATE');
-    setTimeout(()=>{
+    setTimeout(() => {
       console.log(this.travelState$);
-    },9000)
-    
+    }, 9000)
+
   }
 
-  validateLocation(control: FormControl): {[s:string]: boolean} | null{
-   if(control.value){
-    if(control.value.length > 20){
-      return {'maxLengthError': true};
-    }else if(!this.isPatternCorrect('locationPattern', control.value)){
-      return {'onlyLettersError': true};
-    }else {
-      return null;
+  validateLocation(control: FormControl): { [s: string]: boolean } | null {
+    if (control.value) {
+      if (control.value.length > 20) {
+        return { 'maxLengthError': true };
+      } else if (!this.isPatternCorrect('locationPattern', control.value)) {
+        return { 'onlyLettersError': true };
+      } else {
+        return null;
+      }
     }
-   }
-    return null; 
+    return null;
   }
 
 
 
-  validateDate(control: FormControl): {[s:string]: boolean} | null{
-    if(control.value && !this.isPatternCorrect('datePattern', control.value)){
+  validateDate(control: FormControl): { [s: string]: boolean } | null {
+    if (control.value && !this.isPatternCorrect('datePattern', control.value)) {
       console.log('invalid Date')
-      return {'datePatternError': true};
-    }else {
+      return { 'datePatternError': true };
+    } else {
       return null;
     }
   }
 
-  isPatternCorrect(toBeChecked: string, inputString: any): boolean{
-   let pattern: RegExp;
-   switch(toBeChecked){
-    case 'locationPattern':
-     pattern = /^[a-zA-Z]+$/;
-     break;
-    case 'datePattern': 
-      pattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/;
-    break;  
+  isPatternCorrect(toBeChecked: string, inputString: any): boolean {
+    let pattern: RegExp;
+    switch (toBeChecked) {
+      case 'locationPattern':
+        pattern = /^[a-zA-Z]+$/;
+        break;
+      case 'datePattern':
+        pattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/;
+        break;
     }
     return pattern.test(inputString);
   }
 
-  onActivityChange(){
+  onActivityChange() {
     this.travelForm.controls.activities.valueChanges.subscribe(value => {
-      if(value){
+      if (value) {
         this.travelForm.controls.rating.get('rating').setValidators(Validators.required);
         this.travelForm.get('comment').setValidators(Validators.required);
         console.dir(this.travelForm.get('rating'));
-      }else{
+      } else {
         this.travelForm.controls.rating.get('rating').clearValidators();
         this.travelForm.get('comment').clearValidators();
       }
