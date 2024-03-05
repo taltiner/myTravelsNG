@@ -6,7 +6,8 @@
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
-            <mat-error *ngIf="travelForm.get('startDate').errors && travelForm.get('startDate').hasError('pattern')">Invalid date pattern!</mat-error>
+            <mat-error *ngIf="travelForm.get('startDate').errors && travelForm.get('startDate').hasError('pattern')">
+                Invalid date pattern!</mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>End Date</mat-label>
@@ -15,28 +16,32 @@
             <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
-    </div>   
+    </div>
     <div class="responsive-form-fields">
         <mat-form-field class="example-full-width">
             <mat-label>Country</mat-label>
             <input matInput formControlName="country">
-            <mat-error *ngIf="travelForm.get('country').errors && travelForm.get('country').errors['maxLengthError']">Maximum length is 20!</mat-error>
-            <mat-error *ngIf="travelForm.get('country').errors && travelForm.get('country').errors['onlyLettersError']">Only letters are allowed!</mat-error>
-          </mat-form-field>
-          <mat-form-field class="example-full-width">
+            <mat-error *ngIf="travelForm.get('country').errors && travelForm.get('country').errors['maxLengthError']">
+                Maximum length is 20!</mat-error>
+            <mat-error *ngIf="travelForm.get('country').errors && travelForm.get('country').errors['onlyLettersError']">
+                Only letters are allowed!</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
             <mat-label>City</mat-label>
             <input matInput formControlName="city">
-            <mat-error *ngIf="travelForm.get('city').errors && travelForm.get('city').errors['maxLengthError']">Maximum length is 20!</mat-error>
-            <mat-error *ngIf="travelForm.get('city').errors && travelForm.get('city').errors['onlyLettersError']">Only letters are allowed!</mat-error>
-          </mat-form-field>  
-    </div> 
+            <mat-error *ngIf="travelForm.get('city').errors && travelForm.get('city').errors['maxLengthError']">Maximum
+                length is 20!</mat-error>
+            <mat-error *ngIf="travelForm.get('city').errors && travelForm.get('city').errors['onlyLettersError']">Only
+                letters are allowed!</mat-error>
+        </mat-form-field>
+    </div>
     <div class="responsive-form-fields">
         <mat-form-field>
             <mat-label>Activities</mat-label>
             <mat-select formControlName="activities">
                 <mat-option value=""></mat-option>
                 <mat-option value="Test1">Test1</mat-option>
-                <mat-option value="Test2">Test2</mat-option>            
+                <mat-option value="Test2">Test2</mat-option>
             </mat-select>
         </mat-form-field>
         <app-rating *ngIf="travelForm.controls.activities.value" [ratingForm]="travelForm.get('rating')"></app-rating>
@@ -50,5 +55,5 @@
     <div class="button-group">
         <button type="submit" mat-flat-button color="primary">Save</button>
         <button type="button" mat-stroked-button color="primary">Cancel</button>
-    </div>  
+    </div>
 </form>

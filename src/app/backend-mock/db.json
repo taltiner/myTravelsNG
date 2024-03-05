@@ -1,0 +1,28 @@
+{
+    "travels": [
+        {
+            "id": 1,
+            "startDate": "2024-08-05",
+            "endDate": "2024-08-10",
+            "country": "Germany",
+            "city": "Berlin",
+            "activities": [
+                "Sightseeing",
+                "Museum"
+            ],
+            "rating": 4
+        },
+        {
+            "id": 2,
+            "startDate": "2024-09-10",
+            "endDate": "2024-09-15",
+            "country": "France",
+            "city": "Paris",
+            "activities": [
+                "Exploring",
+                "Shopping"
+            ],
+            "rating": 5
+        }
+    ]
+}

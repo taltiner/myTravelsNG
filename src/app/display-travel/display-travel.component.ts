@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 export interface DisplayTravel {
   position: number,
+  country: string,
+  city: string,
   startDate: string,
   endDate: string,
   activities: string,
@@ -14,8 +16,8 @@ export interface DisplayTravel {
 }
 
 const travelData: DisplayTravel[] = [
-  { position: 1, startDate: '10/2/2024', endDate: '10/5/2024', activities: 'Test', rating: 3 },
-  { position: 2, startDate: '8/5/2024', endDate: '8/7/2024', activities: 'Testtt', rating: 4 },
+  { position: 1, country: 'Germany', city: 'Nürnberg', startDate: '10/2/2024', endDate: '10/5/2024', activities: 'Test', rating: 3 },
+  { position: 2, country: 'Germany', city: 'Berlin', startDate: '8/5/2024', endDate: '8/7/2024', activities: 'Testtt', rating: 4 },
 ];
 
 @Component({
@@ -24,7 +26,7 @@ const travelData: DisplayTravel[] = [
   styleUrl: './display-travel.component.css'
 })
 export class DisplayTravelComponent {
-  displayedColumns: string[] = ['position', 'startDate', 'endDate', 'activities', 'rating'];
+  displayedColumns: string[] = ['position', 'country', 'city', 'startDate', 'endDate', 'activities', 'rating'];
   dataSource = travelData;
   travelState$: Observable<TravelState>
 
