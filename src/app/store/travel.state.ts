@@ -1,5 +1,13 @@
-import { FormGroup } from "@angular/forms";
 
 export interface TravelState {
-    travels: FormGroup[];
+    id: string,
+    startDate: string,
+    endDate: string,
+    country: string,
+    city: string,
+    activities: string,
+    comment: string,
+    rating: {
+        rating: string | null;
+    };
 }

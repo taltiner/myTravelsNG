@@ -46,7 +46,7 @@ export class AddTravelComponent implements OnInit {
 
   onSubmit() {
     console.log(this.travelForm);
-    this.store.dispatch(addTravel({ form: this.travelForm }));
+    this.store.dispatch(addTravel({ travel: this.travelForm.value }));
     console.log('----NACH SPEICHERN INITIALER STATE');
       console.log(this.travelState$);
   }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -25,6 +25,9 @@ import { StoreModule } from '@ngrx/store';
 import { travelReducer } from './store/travel.reducer';
 import { MatTableModule } from '@angular/material/table';
 import {MatMenuModule} from '@angular/material/menu';
+import { loadInitialState } from './store/travel.reducer';
+import { TravelService } from './travel.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: '', component: DisplayTravelComponent },
@@ -39,7 +42,6 @@ const appRoutes: Routes = [
     AddTravelComponent,
     NavbarComponent,
     DisplayTravelComponent,
-    AddTravelComponent,
     RatingComponent
   ],
   imports: [
@@ -59,12 +61,19 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatTableModule,
     MatMenuModule,
+    HttpClientModule,
     StoreModule.forRoot({
       travel: travelReducer,
     }),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [TravelService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (travelService: TravelService) => () => loadInitialState(travelService),
+      deps: [TravelService],
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
