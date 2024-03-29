@@ -28,6 +28,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import { loadInitialState } from './store/travel.reducer';
 import { TravelService } from './travel.service';
 import { HttpClientModule } from '@angular/common/http';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const appRoutes: Routes = [
   { path: '', component: DisplayTravelComponent },
@@ -42,7 +44,8 @@ const appRoutes: Routes = [
     AddTravelComponent,
     NavbarComponent,
     DisplayTravelComponent,
-    RatingComponent
+    RatingComponent,
+    DeleteDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +65,7 @@ const appRoutes: Routes = [
     MatTableModule,
     MatMenuModule,
     HttpClientModule,
+    MatDialogModule,
     StoreModule.forRoot({
       travel: travelReducer,
     }),

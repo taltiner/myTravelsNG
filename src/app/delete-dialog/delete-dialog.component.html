@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Delete Travel</h2>
+<mat-dialog-content>
+  <p>Are you sure you want to delete the travel to {{data}}?</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button (click)="onConfirmClick()" type="button" mat-flat-button color="warn">Delete</button>
+    <button (click)="onCancelClick()" type="submit" mat-stroked-button color="primary">Cancel</button>
+</mat-dialog-actions>

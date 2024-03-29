@@ -1,0 +1,26 @@
+mat-card-header{
+    margin-bottom: 10px;
+}
+
+.button-group{
+    margin-top: 15px;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+  }
+  
+  .mat-mdc-row:hover {
+    background-color: #AAABB8;
+  }
+  
+  .demo-row-is-clicked {
+    background-color: #AAABB8;
+  }
+
+  #deleteError{
+    color: red;
+    margin-top: 15px;
+}

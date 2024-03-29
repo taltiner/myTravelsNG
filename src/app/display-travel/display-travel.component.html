@@ -1,40 +1,55 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Display Travels</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="country">
-        <th mat-header-cell *matHeaderCellDef> Country </th>
-        <td mat-cell *matCellDef="let element"> {{element.country}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="city">
-        <th mat-header-cell *matHeaderCellDef> City </th>
-        <td mat-cell *matCellDef="let element"> {{element.city}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="startDate">
-        <th mat-header-cell *matHeaderCellDef> Start Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="endDate">
-        <th mat-header-cell *matHeaderCellDef> End Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="activities">
-        <th mat-header-cell *matHeaderCellDef> Activities </th>
-        <td mat-cell *matCellDef="let element"> {{element.activities}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="rating">
-        <th mat-header-cell *matHeaderCellDef> Rating </th>
-        <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+            <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="country">
+                <th mat-header-cell *matHeaderCellDef> Country </th>
+                <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="city">
+                <th mat-header-cell *matHeaderCellDef> City </th>
+                <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="startDate">
+                <th mat-header-cell *matHeaderCellDef> Start Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="endDate">
+                <th mat-header-cell *matHeaderCellDef> End Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="activities">
+                <th mat-header-cell *matHeaderCellDef> Activities </th>
+                <td mat-cell *matCellDef="let element"> {{element.activities}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="rating">
+                <th mat-header-cell *matHeaderCellDef> Rating </th>
+                <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row 
+                (click)="handleRowClick(row)"
+                [class.demo-row-is-clicked]="clickedRows.has(row)"
+                *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div class="button-group">
+            <button type="submit" mat-stroked-button color="primary">Open</button>
+            <button type="button" mat-stroked-button color="warn" (click)="onDeleteClick()">Delete</button>
+        </div>
+        <mat-error id="deleteError" *ngIf="deleteDialogError">You can not delete more than one travel at once!</mat-error>
+    </mat-card-content>
+</mat-card>
