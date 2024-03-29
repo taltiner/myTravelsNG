@@ -1,18 +1,18 @@
 <form [formGroup]="ratingForm">
     <fieldset class="starability-growRotate">
         <legend>Rating:</legend>
-        <input type="radio" id="first-rate1" value="1" />
+        <input type="radio" id="first-rate1" formControlName="rating" (click)="updateRating('1')" value="1"/>
         <label for="first-rate1" title="Terrible">1 star</label>
-        <input type="radio" id="first-rate2" formControlName="rating" value="2" />
+        <input type="radio" id="first-rate2" formControlName="rating" (click)="updateRating('2')" value="2"/>
         <label for="first-rate2" title="Not good">2 stars</label>
-        <input type="radio" id="first-rate3" formControlName="rating" value="3" />
+        <input type="radio" id="first-rate3" formControlName="rating" (click)="updateRating('3')" value="3"/>
         <label for="first-rate3" title="Average">3 stars</label>
-        <input type="radio" id="first-rate4" formControlName="rating" value="4" />
+        <input type="radio" id="first-rate4" formControlName="rating" (click)="updateRating('4')" value="4"/>
         <label for="first-rate4" title="Very good">4 stars</label>
-        <input type="radio" id="first-rate5" formControlName="rating" value="5" />
+        <input type="radio" id="first-rate5" formControlName="rating" (click)="updateRating('5')" value="5"/>
         <label for="first-rate5" title="Amazing">5 stars</label>
     </fieldset>
     <span 
-    *ngIf="ratingForm.invalid"
+    *ngIf="ratingForm.get('rating').invalid"
     class="invalid">Please select a rating</span>
 </form>

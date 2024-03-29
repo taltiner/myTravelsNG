@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { addTravel } from '../store/travel.actions';
 import { Observable } from 'rxjs';
 import { TravelState } from "../store/travel.state";
+import { TravelService } from '../travel.service';
 
 @Component({
   selector: 'app-add-travel',
@@ -14,7 +15,7 @@ export class AddTravelComponent implements OnInit {
   travelForm: FormGroup = new FormGroup("");
   travelState$: Observable<TravelState>
 
-  constructor(private store: Store<{ travel: TravelState }>) {
+  constructor(private travelService: TravelService, private store: Store<{ travel: TravelState }>) {
     this.travelState$ = store.select('travel');
   }
 
@@ -38,17 +39,15 @@ export class AddTravelComponent implements OnInit {
       'city': new FormControl(null, [Validators.required, this.validateLocation.bind(this)]),
       'activities': new FormControl(null),
       'comment': new FormControl(null),
-      'rating': new FormGroup({
-        'rating': new FormControl(null)
-      })
+      'rating': new FormControl(null)
     });
   }
 
   onSubmit() {
     console.log(this.travelForm);
     this.store.dispatch(addTravel({ travel: this.travelForm.value }));
-    console.log('----NACH SPEICHERN INITIALER STATE');
       console.log(this.travelState$);
+    this.travelService.addTravels(this.travelForm);  
   }
 
   validateLocation(control: FormControl): { [s: string]: boolean } | null {
@@ -68,7 +67,6 @@ export class AddTravelComponent implements OnInit {
 
   validateDate(control: FormControl): { [s: string]: boolean } | null {
     if (control.value && !this.isPatternCorrect('datePattern', control.value)) {
-      console.log('invalid Date')
       return { 'datePatternError': true };
     } else {
       return null;
@@ -89,17 +87,16 @@ export class AddTravelComponent implements OnInit {
   }
 
   onActivityChange() {
-    this.travelForm.controls.activities.valueChanges.subscribe(value => {
+      this.travelForm.controls.activities.valueChanges.subscribe(value => {
       if (value) {
-        this.travelForm.controls.rating.get('rating').setValidators(Validators.required);
+        this.travelForm.get('rating').setValidators(Validators.required);
         this.travelForm.get('comment').setValidators(Validators.required);
-        console.dir(this.travelForm.get('rating'));
       } else {
-        this.travelForm.controls.rating.get('rating').clearValidators();
+        this.travelForm.get('rating').clearValidators();
         this.travelForm.get('comment').clearValidators();
       }
-      this.travelForm.controls.rating.get('rating').updateValueAndValidity();
+      this.travelForm.get('rating').updateValueAndValidity();
       this.travelForm.get('comment').updateValueAndValidity();
-    })
+    }) 
   }
 }

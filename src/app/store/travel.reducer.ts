@@ -25,7 +25,7 @@ const initialState: TravelState = {
     city: 'Köln',
     activities: 'Test',
     comment: 'Test',
-    rating: { rating: '4'}
+    rating: '4'
 };
 
 export const travelReducer = createReducer(
@@ -56,6 +56,6 @@ function getDefaultTravelState(): TravelState {
         city: '',
         activities: '',
         comment: '',
-        rating: {rating: ''}
+        rating:  ''
     };
 }

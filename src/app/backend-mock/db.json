@@ -1,24 +1,24 @@
 {
-    "travels": [
-        {
-            "id": "1",
-            "startDate": "2024-08-05",
-            "endDate": "2024-08-10",
-            "country": "Germany",
-            "city": "Berlin",
-            "activities": "Test1",
-            "comment": "Test",
-            "rating": {"rating": "2"}
-        },
-        {
-            "id": "2",
-            "startDate": "2024-09-10",
-            "endDate": "2024-09-15",
-            "country": "France",
-            "city": "Paris",
-            "activities": "Test2",
-            "comment": "Test",
-            "rating": {"rating": "4"}
-        }
-    ]
+  "travels": [
+    {
+      "id": "1",
+      "startDate": "2024-08-05",
+      "endDate": "2024-08-10",
+      "country": "Germany",
+      "city": "Berlin",
+      "activities": "Test1",
+      "comment": "Test",
+      "rating": "3"
+    },
+    {
+      "id": "2",
+      "startDate": "2024-09-10",
+      "endDate": "2024-09-15",
+      "country": "Türkiye",
+      "city": "Ankara",
+      "activities": "Test2",
+      "comment": "Test",
+      "rating": "4"
+    }
+  ]
 }

@@ -7,7 +7,6 @@ export interface TravelState {
     city: string,
     activities: string,
     comment: string,
-    rating: {
-        rating: string | null;
-    };
+    rating:  string ;
+   
 }

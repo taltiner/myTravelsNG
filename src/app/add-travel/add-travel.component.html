@@ -44,7 +44,7 @@
                 <mat-option value="Test2">Test2</mat-option>
             </mat-select>
         </mat-form-field>
-        <app-rating *ngIf="travelForm.controls.activities.value" [ratingForm]="travelForm.get('rating')"></app-rating>
+        <app-rating [ratingForm]="travelForm" *ngIf="travelForm.controls.activities.value" ></app-rating>
     </div>
     <div *ngIf="travelForm.controls.activities.value">
         <mat-form-field style="width:100%">
