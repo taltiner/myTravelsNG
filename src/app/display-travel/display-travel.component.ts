@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { TravelState } from "../store/travel.state";
 import { Observable } from 'rxjs';
 import { TravelService } from '../travel.service';
@@ -12,6 +12,7 @@ import {
   MatDialogActions,
   MatDialogClose, 
 } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
 
 @Component({
   selector: 'app-display-travel',
@@ -23,23 +24,26 @@ export class DisplayTravelComponent implements OnInit {
   dataSource: TravelState[];
   travelState$: Observable<TravelState[]>
   clickedRows = new Set<TravelState>();
-  deleteDialogData: string = '';
+  deleteDialogData: string[] = [];
+  deleteTravelIds: string[] = [];
   deleteDialogError: boolean = false;
-/*   constructor(private store: Store<{ travel: TravelState }>) {
-    this.travelState$ = store.select('travel');
-  }
-
-  ngOnInit() {
-    console.log(this.travelState$);
-  } */
-
+  @ViewChild(MatTable) table: MatTable<any>;
+  
   constructor( public dialog: MatDialog,
-               private travelService: TravelService) { }
+               private travelService: TravelService,
+               private cdr: ChangeDetectorRef) { }
 
     ngOnInit(): void {
       this.travelState$ = this.travelService.getTravels();
+      this.subscribeToTravelState();
+    }
+
+    subscribeToTravelState(): void {
+      console.log('subscribeToTravelState entered');
       this.travelState$.subscribe(data => {
+        console.log('Daten werden aktualisiert');
         this.dataSource = data;
+        this.cdr.detectChanges();
       });
     }
 
@@ -52,19 +56,29 @@ export class DisplayTravelComponent implements OnInit {
     }
 
     onDeleteClick(){
-      if(this.clickedRows.size === 1){
         this.deleteDialogError = false;
-        this.clickedRows.forEach((data)=> { this.deleteDialogData = data.city });
+        this.clickedRows.forEach((data)=> { this.deleteDialogData.push(data.city)});
         const dialogRef = this.dialog.open(DeleteDialogComponent, {width: '600px', data: this.deleteDialogData});
 
         dialogRef.afterClosed().subscribe(result => {
+          if(result){
+            this.clickedRows.forEach((data)=> this.deleteTravelIds.push(data.id))        
+            this.travelService.deleteTravels(this.deleteTravelIds);
+            this.subscribeToTravelState();
+            this.table.renderRows();
+            this.deleteTravelIds = [];
+          }
           
         });
+    }
+
+    onOpenClick(){
+      if(this.clickedRows.size === 1){
+        this.deleteDialogError = false;
 
       }else{
         this.deleteDialogError = true;
       }
-
     }
   }
 

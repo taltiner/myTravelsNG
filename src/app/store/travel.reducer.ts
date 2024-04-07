@@ -5,17 +5,6 @@ import { TravelState } from "./travel.state";
 import { TravelService } from "../travel.service";
 import { Observable, catchError, map, of } from "rxjs";
 
-/* const initialTravel = new FormGroup({
-    'startDate': new FormControl('2024-08-05'),
-    'endDate': new FormControl('2024-08-10'),
-    'country': new FormControl('test'),
-    'city': new FormControl('test'),
-    'activities': new FormControl('test'),
-    'comment': new FormControl('test'),
-    'rating': new FormGroup({
-        'rating': new FormControl(4)
-    })
-}); */
 
 const initialState: TravelState = {
     id: '2',
@@ -49,7 +38,7 @@ export function loadInitialState(travelService: TravelService): Observable<Trave
 
 function getDefaultTravelState(): TravelState {
     return {
-        id: '',
+        id: '0',
         startDate: '', // Hier deine Standardwerte für startDate, endDate, usw. einfügen
         endDate: '',
         country: '',

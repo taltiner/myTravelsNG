@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { TravelState } from './store/travel.state'
 @Injectable({
@@ -8,10 +8,25 @@ import { TravelState } from './store/travel.state'
 })
 export class TravelService {
   private apiUrl = 'http://localhost:3000/travels';
+  private travelsSubject: BehaviorSubject<TravelState[]> = new BehaviorSubject<TravelState[]>([]);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.fetchTravels();
+  }
+
+  fetchTravels(): void {
+    this.http.get<TravelState[]>(this.apiUrl).pipe(
+      catchError(error => {
+        console.error('Error fetching travels:', error);
+        return throwError(error);
+      })
+    ).subscribe(travels => {
+      this.travelsSubject.next(travels);
+    });
+  }
 
   getTravels(): Observable<TravelState[]> {
+    console.log('travelservice getTravels() entered');
     return this.http.get<TravelState[]>(this.apiUrl).pipe(
       catchError(error => {
         console.error('Error fetching travels:', error);
@@ -47,5 +62,20 @@ export class TravelService {
         }
       );
     });
+  }
+
+  deleteTravels(travelIds: string[]) {
+    travelIds.forEach(id => {
+      const deleteUrl = `${this.apiUrl}/${id}`;
+      this.http.delete<[]>(deleteUrl).subscribe(
+        () => this.fetchTravels(),
+        error => { 
+          console.log(`Error deleting travel with ID ${id}:`, error);
+          throw error;
+        }
+      );
+    });
+      
+    
   }
 }
