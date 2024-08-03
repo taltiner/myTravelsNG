@@ -57,10 +57,16 @@ export class AddTravelComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.travelForm);
     this.store.dispatch(addTravel({ travel: this.travelForm.value }));
-      console.log(this.travelState$);
-    this.travelService.addTravels(this.travelForm);  
+    if(this.activatedRoute.snapshot !== undefined && this.activatedRoute.snapshot.queryParams.id !== undefined) {
+        console.log('PUT Request');
+        
+      const id = this.activatedRoute.snapshot.queryParams.id;
+      this.travelService.updateTravel(this.travelForm.value, id);
+    }else {
+      this.travelService.addTravels(this.travelForm);  
+    }
+
     this.router.navigate(['..']);
   }
 
@@ -112,6 +118,8 @@ export class AddTravelComponent implements OnInit {
       this.travelForm.get('rating').updateValueAndValidity();
       this.travelForm.get('comment').updateValueAndValidity();
     }) 
+    console.log('travelForm ', this.travelForm);;
+    
   }
 
   onCancel() {

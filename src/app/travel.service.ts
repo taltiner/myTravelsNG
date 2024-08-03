@@ -66,14 +66,26 @@ export class TravelService {
       };
 
       this.http.post<any>(this.apiUrl, newTravel).subscribe(
-        () => console.log('Travel added successfully'),
-        error => {
-          console.error('Error adding travel:', error);
+        () => this.fetchTravels(),
+        error => { 
+          console.log(`Error adding travel:`, error);
           throw error;
         }
       );
     });
   }
+
+  updateTravel(updatedTravelData: any, travelId: string): void {
+    const travelUrl = `${this.apiUrl}/${travelId}`;
+    this.http.put<any>(travelUrl, updatedTravelData).subscribe(
+      () => this.fetchTravels(),
+      error => { 
+        console.log(`Error updating travel:`, error);
+        throw error;
+      }
+    );
+  }
+  
 
   deleteTravels(travelIds: string[]) {
     travelIds.forEach(id => {
