@@ -1,27 +1,40 @@
 import { FormControl, FormGroup } from "@angular/forms";
-import { createReducer, on } from "@ngrx/store";
-import { addTravel } from "./travel.actions";
-import { TravelState } from "./travel.state";
+import { MemoizedSelector, createReducer, createSelector, on } from "@ngrx/store";
+import { addTravel, navigateToTravel } from "./travel.actions";
+//import { TravelState } from "./travel.state";
 import { TravelService } from "../travel.service";
 import { Observable, catchError, map, of } from "rxjs";
+import { Travel } from "../model/travel";
 
+export interface TravelState {
+    selectedTravel: Travel
+}
 
-const initialState: TravelState = {
-    id: '2',
-    startDate: '2024-08-05',
-    endDate: '2024-08-07',
-    country: 'Germany',
-    city: 'Köln',
-    activities: 'Test',
-    comment: 'Test',
-    rating: '4'
+const initialSelectedTravel: Travel = {
+    id: '',
+    startDate: '',
+    endDate: '',
+    country: '',
+    city: '',
+    activities: '',
+    comment: '',
+    rating: ''
 };
 
+export const initialTravelState: TravelState = {
+    selectedTravel: initialSelectedTravel
+}
+
 export const travelReducer = createReducer(
-    initialState,
+    initialTravelState,
     on(addTravel, (state, action) => ({
         ...state,
-        ...action.travel
+        selectedTravel: action.travel
+    })),
+    on(navigateToTravel, (state, action) => ({
+        ...state,
+        selectedTravel: action.travel
+
     }))
 
 );
@@ -36,9 +49,9 @@ export function loadInitialState(travelService: TravelService): Observable<Trave
     );
 }
 
-function getDefaultTravelState(): TravelState {
+function getDefaultTravelState(): Travel {
     return {
-        id: '0',
+        id: '',
         startDate: '', // Hier deine Standardwerte für startDate, endDate, usw. einfügen
         endDate: '',
         country: '',
@@ -47,4 +60,8 @@ function getDefaultTravelState(): TravelState {
         comment: '',
         rating:  ''
     };
+}
+
+export function getState(){
+    return this.state;
 }

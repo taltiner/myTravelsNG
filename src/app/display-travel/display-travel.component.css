@@ -20,6 +20,12 @@ mat-card-header{
     background-color: #AAABB8;
   }
 
+  .test:hover {
+    background-color: rgba(68, 22, 206, 0.756);
+    color: white;
+  }
+  
+
   #deleteError{
     color: red;
     margin-top: 15px;

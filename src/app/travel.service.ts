@@ -2,20 +2,21 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { TravelState } from './store/travel.state'
+import { Travel } from './model/travel';
+
 @Injectable({
   providedIn: 'root'
 })
 export class TravelService {
   private apiUrl = 'http://localhost:3000/travels';
-  private travelsSubject: BehaviorSubject<TravelState[]> = new BehaviorSubject<TravelState[]>([]);
+  private travelsSubject: BehaviorSubject<Travel[]> = new BehaviorSubject<Travel[]>([]);
 
   constructor(private http: HttpClient) {
     this.fetchTravels();
   }
 
   fetchTravels(): void {
-    this.http.get<TravelState[]>(this.apiUrl).pipe(
+    this.http.get<Travel[]>(this.apiUrl).pipe(
       catchError(error => {
         console.error('Error fetching travels:', error);
         return throwError(error);
@@ -25,9 +26,19 @@ export class TravelService {
     });
   }
 
-  getTravels(): Observable<TravelState[]> {
-    console.log('travelservice getTravels() entered');
-    return this.http.get<TravelState[]>(this.apiUrl).pipe(
+  getTravels(): Observable<Travel[]> {
+    
+    return this.http.get<Travel[]>(this.apiUrl).pipe(
+      catchError(error => {
+        console.error('Error fetching travels:', error);
+        throw error;
+      })
+    );
+  }
+
+  getTravel(id: string): Observable<Travel> {
+
+    return this.http.get<Travel>(`${this.apiUrl}/${id}`).pipe(
       catchError(error => {
         console.error('Error fetching travels:', error);
         throw error;
@@ -36,7 +47,7 @@ export class TravelService {
   }
 
   addTravels(newTravelData: any): void {
-    this.getTravels().subscribe((travels: TravelState[]) => {
+    this.getTravels().subscribe((travels: Travel[]) => {
       const lastId = travels.length > 0 ? Math.max(...travels.map(travel => +travel.id)) : 0;
       const newId = lastId + 1;
 
@@ -44,7 +55,7 @@ export class TravelService {
       const endDate = new Date(newTravelData.get('endDate').value).toISOString().split('T')[0];
 
       const newTravel = {
-        id: newId,
+        id: newId.toString(),
         startDate: startDate,
         endDate: endDate,
         country: newTravelData.get('country').value,
@@ -75,7 +86,7 @@ export class TravelService {
         }
       );
     });
-      
-    
   }
+
+
 }

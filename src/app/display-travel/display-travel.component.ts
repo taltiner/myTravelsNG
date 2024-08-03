@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { TravelState } from "../store/travel.state";
+import { TravelState } from '../store/travel.reducer';
 import { Observable } from 'rxjs';
 import { TravelService } from '../travel.service';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
@@ -13,6 +13,12 @@ import {
   MatDialogClose, 
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { Store } from '@ngrx/store';
+import { Travel } from '../model/travel';
+import { navigateToTravel } from '../store/travel.actions';
+import { Router } from '@angular/router';
+import { Option } from '../model/options';
+import { ActivityOptions } from '../model/activities';
 
 @Component({
   selector: 'app-display-travel',
@@ -20,28 +26,38 @@ import { MatTable } from '@angular/material/table';
   styleUrl: './display-travel.component.css'
 })
 export class DisplayTravelComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'country', 'city', 'startDate', 'endDate', 'activities', 'rating'];
-  dataSource: TravelState[];
-  travelState$: Observable<TravelState[]>
-  clickedRows = new Set<TravelState>();
+  displayedColumns: string[] = ['position', 'country', 'city', 'startDate', 'endDate', 'activities', 'rating', 'actions'];
+  dataSource: Travel[];
+  travelState$: Observable<Travel[]>
+  clickedRows = new Set<Travel>();
   deleteDialogData: string[] = [];
   deleteTravelIds: string[] = [];
   deleteDialogError: boolean = false;
+  errorText = '';
+  activityOptions: Option[] = ActivityOptions;
+
   @ViewChild(MatTable) table: MatTable<any>;
   
   constructor( public dialog: MatDialog,
                private travelService: TravelService,
-               private cdr: ChangeDetectorRef) { }
+               private cdr: ChangeDetectorRef,
+               private store: Store<{ travel: TravelState }>,
+               private router: Router) { }
 
     ngOnInit(): void {
       this.travelState$ = this.travelService.getTravels();
       this.subscribeToTravelState();
     }
 
-    subscribeToTravelState(): void {
+    getTravelValue(value: string): string {
+      const option = this.activityOptions.find(option => option.value === value);
+      return option ? option.text : '';
+    }
+
+    private subscribeToTravelState(): void {
       console.log('subscribeToTravelState entered');
       this.travelState$.subscribe(data => {
-        console.log('Daten werden aktualisiert');
+        console.log('Daten werden aktualisiert', data);
         this.dataSource = data;
         this.cdr.detectChanges();
       });
@@ -49,13 +65,14 @@ export class DisplayTravelComponent implements OnInit {
 
     handleRowClick(row): void{
       if(!this.clickedRows.has(row)){
-        this.clickedRows.add(row)
+        this.clickedRows.add(row);
       }else{
         this.clickedRows.delete(row);
       }
     }
 
     onDeleteClick(){
+      if(this.clickedRows.size > 0) {
         this.deleteDialogError = false;
         this.clickedRows.forEach((data)=> { this.deleteDialogData.push(data.city)});
         const dialogRef = this.dialog.open(DeleteDialogComponent, {width: '600px', data: this.deleteDialogData});
@@ -70,15 +87,24 @@ export class DisplayTravelComponent implements OnInit {
           }
           
         });
-    }
-
-    onOpenClick(){
-      if(this.clickedRows.size === 1){
-        this.deleteDialogError = false;
-
-      }else{
+      }else {
         this.deleteDialogError = true;
+        this.errorText = 'No travel items were selected for removal.'
       }
+
     }
+
+    onOpenClick(id: string) {
+      this.router.navigate(['/addTravel'], {
+        queryParams: { id: id }
+    });
+  }
+
+  onNewClick() {
+    this.router.navigate(['/addTravel'], {
+      queryParams: {  }
+  });
+}
+
   }
 

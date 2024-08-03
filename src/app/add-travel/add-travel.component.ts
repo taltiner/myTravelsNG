@@ -3,8 +3,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { addTravel } from '../store/travel.actions';
 import { Observable } from 'rxjs';
-import { TravelState } from "../store/travel.state";
+import { Travel } from "../model/travel";
+import { Option } from "../model/options";
+import { ActivityOptions } from "../model/activities";
 import { TravelService } from '../travel.service';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-travel',
@@ -13,22 +17,31 @@ import { TravelService } from '../travel.service';
 })
 export class AddTravelComponent implements OnInit {
   travelForm: FormGroup = new FormGroup("");
-  travelState$: Observable<TravelState>
+  travelState$: Observable<Travel>;
+  activityOptions: Option[] = ActivityOptions;
+  
+  constructor(private travelService: TravelService, 
+              private store: Store<{travel: Travel}>, 
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {
 
-  constructor(private travelService: TravelService, private store: Store<{ travel: TravelState }>) {
-    this.travelState$ = store.select('travel');
   }
 
   ngOnInit(): void {
-    console.log('----INITIALER STATE');
-    console.log(this.travelState$);
     this.initializeForm();
-    this.onActivityChange();
+      if(this.activatedRoute.snapshot !== undefined && this.activatedRoute.snapshot.queryParams.id !== undefined) {
+        
+        const id = this.activatedRoute.snapshot.queryParams.id;
+        this.travelService.getTravel(id).subscribe( (travel) => {
+          this.travelForm.patchValue(travel);
+        });
+      }
+
+      this.onActivityChange();
   }
 
   ngAfterViewInit() {
-    console.log('----NACH INITIALER STATE');
-    console.log(this.travelState$);
+
   }
 
   initializeForm() {
@@ -48,6 +61,7 @@ export class AddTravelComponent implements OnInit {
     this.store.dispatch(addTravel({ travel: this.travelForm.value }));
       console.log(this.travelState$);
     this.travelService.addTravels(this.travelForm);  
+    this.router.navigate(['..']);
   }
 
   validateLocation(control: FormControl): { [s: string]: boolean } | null {
@@ -98,5 +112,11 @@ export class AddTravelComponent implements OnInit {
       this.travelForm.get('rating').updateValueAndValidity();
       this.travelForm.get('comment').updateValueAndValidity();
     }) 
+  }
+
+  onCancel() {
+    console.log('onCancel');
+    
+    this.router.navigate(['..']);
   }
 }

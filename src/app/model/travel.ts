@@ -1,5 +1,4 @@
-
-/* export interface TravelState {
+export interface Travel {
     id: string,
     startDate: string,
     endDate: string,
@@ -8,6 +7,4 @@
     activities: string,
     comment: string,
     rating:  string ;
-   
 }
- */

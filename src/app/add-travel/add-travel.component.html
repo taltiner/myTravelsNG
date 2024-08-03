@@ -39,9 +39,7 @@
         <mat-form-field>
             <mat-label>Activities</mat-label>
             <mat-select formControlName="activities">
-                <mat-option value=""></mat-option>
-                <mat-option value="Test1">Test1</mat-option>
-                <mat-option value="Test2">Test2</mat-option>
+                <mat-option *ngFor="let option of activityOptions" [value]="option.value">{{option.text}}</mat-option>
             </mat-select>
         </mat-form-field>
         <app-rating [ratingForm]="travelForm" *ngIf="travelForm.controls.activities.value" ></app-rating>
@@ -54,6 +52,6 @@
     </div>
     <div class="button-group">
         <button type="submit" mat-flat-button color="primary">Save</button>
-        <button type="button" mat-stroked-button color="primary">Cancel</button>
+        <button type="button" mat-stroked-button color="primary" (click)="onCancel()">Cancel</button>
     </div>
 </form>

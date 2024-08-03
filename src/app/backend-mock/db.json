@@ -6,7 +6,7 @@
       "endDate": "2024-08-10",
       "country": "Germany",
       "city": "Berlin",
-      "activities": "Test1",
+      "activities": "SIGHTSEEING",
       "comment": "Test",
       "rating": "3"
     },
@@ -16,9 +16,29 @@
       "endDate": "2024-09-15",
       "country": "Türkiye",
       "city": "Ankara",
-      "activities": "Test2",
+      "activities": "BEACHACTIVITIES",
       "comment": "Test",
       "rating": "4"
+    },
+    {
+      "id": "3",
+      "startDate": "2024-08-03",
+      "endDate": "2024-08-06",
+      "country": "Italien",
+      "city": "Rom",
+      "activities": "CULTURALTOURS",
+      "comment": "Amazing",
+      "rating": "3"
+    },
+    {
+      "id": "4",
+      "startDate": "2024-08-17",
+      "endDate": "2024-08-21",
+      "country": "Japan",
+      "city": "Tokio",
+      "activities": "FOODTASTING",
+      "comment": "yummy",
+      "rating": "3"
     }
   ]
 }
