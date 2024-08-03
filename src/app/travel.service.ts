@@ -76,8 +76,12 @@ export class TravelService {
   }
 
   updateTravel(updatedTravelData: any, travelId: string): void {
+    const startDate = new Date(updatedTravelData.get('startDate').value).toISOString().split('T')[0];
+    const endDate = new Date(updatedTravelData.get('endDate').value).toISOString().split('T')[0];
+    updatedTravelData.patchValue({startDate: startDate, endDate: endDate});
+
     const travelUrl = `${this.apiUrl}/${travelId}`;
-    this.http.put<any>(travelUrl, updatedTravelData).subscribe(
+    this.http.put<any>(travelUrl, updatedTravelData.value).subscribe(
       () => this.fetchTravels(),
       error => { 
         console.log(`Error updating travel:`, error);

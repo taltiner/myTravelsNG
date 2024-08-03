@@ -62,7 +62,7 @@ export class AddTravelComponent implements OnInit {
         console.log('PUT Request');
         
       const id = this.activatedRoute.snapshot.queryParams.id;
-      this.travelService.updateTravel(this.travelForm.value, id);
+      this.travelService.updateTravel(this.travelForm, id);
     }else {
       this.travelService.addTravels(this.travelForm);  
     }

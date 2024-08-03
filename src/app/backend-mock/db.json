@@ -1,14 +1,14 @@
 {
   "travels": [
     {
-      "id": "1",
-      "startDate": "2024-08-05",
+      "startDate": "2024-08-03",
       "endDate": "2024-08-10",
       "country": "Germany",
       "city": "Berlin",
       "activities": "SIGHTSEEING",
       "comment": "Test",
-      "rating": "3"
+      "rating": "3",
+      "id": "1"
     },
     {
       "id": "2",
@@ -21,34 +21,24 @@
       "rating": "4"
     },
     {
-      "id": "3",
-      "startDate": "2024-08-03",
-      "endDate": "2024-08-06",
+      "startDate": "2024-08-19",
+      "endDate": "2024-07-31",
       "country": "Italien",
       "city": "Rom",
-      "activities": "CULTURALTOURS",
+      "activities": "HIKING",
       "comment": "Amazing",
-      "rating": "3"
+      "rating": "5",
+      "id": "3"
     },
     {
-      "id": "4",
-      "startDate": "2024-08-17",
-      "endDate": "2024-08-21",
+      "id": "6",
+      "startDate": "2024-08-10",
+      "endDate": "2024-08-14",
       "country": "Japan",
       "city": "Tokio",
-      "activities": "FOODTASTING",
-      "comment": "yummy",
-      "rating": "3"
-    },
-    {
-      "startDate": "2024-08-03T22:00:00.000Z",
-      "endDate": "2024-08-15T22:00:00.000Z",
-      "country": "Amerikaa",
-      "city": "NewYorky",
-      "activities": "BEACHACTIVITIES",
-      "comment": "test",
-      "rating": "5",
-      "id": "6"
+      "activities": "HIKING",
+      "comment": "Ramen wow ",
+      "rating": "5"
     }
   ]
 }
