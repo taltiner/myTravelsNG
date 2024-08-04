@@ -1,6 +1,20 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>Display Travels</mat-card-title>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 displayTable">
+                    <mat-card-title>Display Travels</mat-card-title>
+                </div>
+                <div class="col-6 sorter">
+                    <app-sort-dropdown
+                    [dataSource]="dataSource"
+                    (selectionChange)="handleDataSorted($event)">
+                </app-sort-dropdown>
+                </div>
+            </div>
+        </div>
+
+
     </mat-card-header>
     <mat-card-content>
         <table #table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

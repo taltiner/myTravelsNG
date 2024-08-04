@@ -30,6 +30,7 @@ import { TravelService } from './travel.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SortDropdownComponent } from './display-travel/sort-dropdown/sort-dropdown.component';
 
 const appRoutes: Routes = [
   { path: '', component: DisplayTravelComponent },
@@ -46,6 +47,7 @@ const appRoutes: Routes = [
     DisplayTravelComponent,
     RatingComponent,
     DeleteDialogComponent,
+    SortDropdownComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { TravelState } from '../store/travel.reducer';
 import { Observable } from 'rxjs';
 import { TravelService } from '../travel.service';
@@ -37,6 +37,7 @@ export class DisplayTravelComponent implements OnInit {
   activityOptions: Option[] = ActivityOptions;
 
   @ViewChild(MatTable) table: MatTable<any>;
+  sortedData: Travel[];
   
   constructor( public dialog: MatDialog,
                private travelService: TravelService,
@@ -49,15 +50,21 @@ export class DisplayTravelComponent implements OnInit {
       this.subscribeToTravelState();
     }
 
+    handleDataSorted(data: Travel[]) {
+      console.log('handleDataSorted ', data);
+      
+      this.dataSource = data;
+      this.table.renderRows();
+    }
+
     getTravelValue(value: string): string {
       const option = this.activityOptions.find(option => option.value === value);
       return option ? option.text : '';
     }
 
     private subscribeToTravelState(): void {
-      console.log('subscribeToTravelState entered');
       this.travelState$.subscribe(data => {
-        console.log('Daten werden aktualisiert', data);
+        console.log('Daten werden aktualisiert', data);   
         this.dataSource = data;
         this.cdr.detectChanges();
       });

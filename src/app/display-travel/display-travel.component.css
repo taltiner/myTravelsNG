@@ -30,3 +30,22 @@ mat-card-header{
     color: red;
     margin-top: 15px;
 }
+
+.sorter {
+  display: flex;
+  justify-content: end;
+}
+
+.container {
+  margin: 0px;
+}
+
+.displayTable {
+  display: flex;
+  justify-content: start;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
