@@ -6,5 +6,6 @@ export const ActivityOptions: Option[] = [
     { value: 'BEACHACTIVITIES', text: 'Beach Activities'},
     { value: 'CULTURALTOURS', text: 'Cultural Tours'},
     { value: 'FOODTASTING', text: 'Food Tasting'},
-    { value: 'FESTIVALSEVENTS', text: 'Festivals and Events'}
+    { value: 'FESTIVALSEVENTS', text: 'Festivals and Events'},
+    { value: 'FAMILY', text: 'Visiting the Family'}
   ];
